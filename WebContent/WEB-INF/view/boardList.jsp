@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import = "com.koreait.board.db.BoardDAO" %>
+    <%@ page import = "com.koreait.board.vo.BoardVO" %>
+    <%@ page import = "java.util.*" %>
     <%
-    String strI_board = request.getParameter("i_board");
+    /* String strI_board = request.getParameter("i_board");
+    List<BoardVO> boardList = new ArrayList(BoardDAO.selBoardList());
+     */
+    List<BoardVO> list = (List<BoardVO>)request.getAttribute("data");
+    
     %>
 <!DOCTYPE html>
 <html>
@@ -11,6 +18,15 @@
 </head>
 <body>
 	<div>리스트</div>
-	<div><%=strI_board %></div>
+	<table>
+	<% for(BoardVO vo : list) { %>
+	<tr>
+		<td><%=vo.getI_board()%></td>
+		<td><%=vo.getTitle()%></td>
+		<td><%=vo.getCtnt()%></td>
+		<td><%=vo.getI_student()%></td>
+	</tr>
+	<%}%>
+	</table>
 </body>
 </html>
