@@ -5,12 +5,8 @@
     <%@ page import = "com.koreait.board.db.BoardDAO" %>
     <%@ page import = "com.koreait.board.vo.BoardVO" %>
     <%
-    	Connection conn = null;
-    	PreparedStatement ps = null;
-    	ResultSet rs = null;
+    	BoardVO vo =(BoardVO)request.getAttribute("data");
     	String strI_board = request.getParameter("i_board");
-    	
-    	String sql = "select title,ctnt,i_student from t_board where i_board= ?";
     	int i_board = Integer.parseInt(strI_board);
     %>
 <!DOCTYPE html>
@@ -20,6 +16,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div><%=i_board %></div>
+<div>번호 : ${data.i_board}</div>
+<div>제목 : ${data.title}</div>
+<div>내용 : ${data.ctnt}</div>
+<div>작성자 : ${data.i_student}</div>
+<button onclick="movetoWrite(<%=vo.getI_board()%>)">수정</button>
 </body>
+<script>
+function movetoWrite(i_board){
+	console.log('movetoWrite-i_board:'+i_board)
+	location.href = "boardWrite?i_board="+i_board;
+}
+</script>
 </html>
