@@ -47,9 +47,7 @@ public class BoardDetailSer extends HttpServlet {
 			request.setAttribute("data", BoardDAO.detailBoardList(para));
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/boardDetail.jsp?i_board="+strI_board);
 			rd.forward(request, response);
-		}
-		
-		
+		}	
 	}
 
 	/**

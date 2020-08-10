@@ -71,7 +71,7 @@ public class BoardDAO {
 		PreparedStatement ps= null;
 		
 		String sql = "insert into t_board(i_board, title,ctnt, i_student) "+
-	    		"select nvl(max(i_board),0)+ 1,?,?,? from t_board";
+	    		"values (seq_board.nextval,?,?,?)";
 		try{
 	    	conn = DBCon.getCon();
 	    	ps = conn.prepareStatement(sql);
@@ -86,5 +86,40 @@ public class BoardDAO {
 	    	DBCon.close(conn, ps);
 	    }
 //		return vo;
+	}
+	
+	public static void updateList(BoardVO para){
+		Connection conn = null;
+		PreparedStatement ps= null;
+		int intI_board = para.getI_board();
+		String sql = "update t_board set title=?,ctnt=? where i_board="+intI_board;
+		try {
+			conn = DBCon.getCon();
+	    	ps = conn.prepareStatement(sql);
+	    	ps.setString(1,para.getTitle());
+	        ps.setString(2,para.getTitle());
+	        ps.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			DBCon.close(conn, ps);
+		}
+		
+	}
+	public static void deleteList(BoardVO para) {
+		Connection conn = null;
+		PreparedStatement ps= null;
+		int intI_board = para.getI_board();
+		String sql = "delete from t_board where i_board= ?";
+		try {
+			conn = DBCon.getCon();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1,intI_board);
+			ps.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBCon.close(conn, ps);
+		}
 	}
 }

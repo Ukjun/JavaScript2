@@ -36,7 +36,6 @@ td {
 	text-align: center;
 }
 .itemRow:hover{
-	background-color: #ffffcc;
 	cursor: pointer;
 	animation-duration : 2s;
 	animation-name : ani_hover;

@@ -21,11 +21,18 @@
 <div>내용 : ${data.ctnt}</div>
 <div>작성자 : ${data.i_student}</div>
 <button onclick="movetoWrite(<%=vo.getI_board()%>)">수정</button>
+<button onClick="movetoDelete(<%=vo.getI_board()%>)">삭제</button>
 </body>
 <script>
 function movetoWrite(i_board){
 	console.log('movetoWrite-i_board:'+i_board)
 	location.href = "boardWrite?i_board="+i_board;
+}
+
+function movetoDelete(i_board){
+	alert('삭제하시겠습니까?');
+	console.log('movetoDelete-i_board:'+i_board)
+	location.href = "boardDelete?i_board="+i_board;
 }
 </script>
 </html>

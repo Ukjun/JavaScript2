@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <% String strI_board = request.getParameter("i_board"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
      }
 </style>
 <body>
-	<form id = "frm" action="/boardWrite" method="post" onsubmit="return chk()">
+	<form id = "frm"  method="post" onsubmit="return chk()">
 	<fieldset>
 		<legend>
 		<strong>게시판 작성</strong>
@@ -31,7 +32,7 @@
             placeholder="50자 이내로 써주세요"></textarea></li>
             <li><label>작성자 : </label><input type = "text" name="i_student" id="i_student"></li>
         </ul>
-            <input type="submit" value="작성">
+            <input type="submit" onclick="insertUpdate(<%=strI_board %>)" value="작성">
             <input type="reset" value="다시 작성">
 	</fieldset>
 			
@@ -55,7 +56,15 @@
 			}else if(eleValid(frm.i_student,'작성자')){
 				return false;
 			}
-
+		}
+		
+		function insertUpdate(strI_board){
+			if(strI_board==null){
+				frm.action = "/boardWrite"
+			}else{
+				frm.action = "/boardWrite?i_board="+strI_board;
+			}
+			
 		}
 	</script>
 </body>
