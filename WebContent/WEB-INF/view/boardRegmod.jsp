@@ -32,7 +32,7 @@
             placeholder="50자 이내로 써주세요"></textarea></li>
             <li><label>작성자 : </label><input type = "text" name="i_student" id="i_student"></li>
         </ul>
-            <input type="submit" onclick="insertUpdate(<%=strI_board %>)" value="작성">
+            <input type="submit" onclick="insertUpdate(${data.i_board})" value="작성">
             <input type="reset" value="다시 작성">
 	</fieldset>
 			
@@ -59,12 +59,19 @@
 		}
 		
 		function insertUpdate(strI_board){
-			if(strI_board==null){
+			if(strI_board==0){
 				frm.action = "/boardWrite"
 			}else{
 				frm.action = "/boardWrite?i_board="+strI_board;
 			}
 			
+		}
+		
+		if(`${data.i_board}`!=0){
+			document.getElementById("title").value = `${data.title}`;
+			document.getElementById("ctnt").value = `${data.ctnt}`;
+			document.getElementById("i_student").value = `${data.i_student}`;
+			document.getElementById("i_student").readOnly = true;
 		}
 	</script>
 </body>

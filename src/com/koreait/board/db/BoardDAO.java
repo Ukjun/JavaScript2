@@ -97,7 +97,7 @@ public class BoardDAO {
 			conn = DBCon.getCon();
 	    	ps = conn.prepareStatement(sql);
 	    	ps.setString(1,para.getTitle());
-	        ps.setString(2,para.getTitle());
+	        ps.setString(2,para.getCtnt());
 	        ps.executeUpdate();
 		}catch(Exception e){
 			e.printStackTrace();

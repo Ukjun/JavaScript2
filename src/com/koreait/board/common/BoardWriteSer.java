@@ -41,8 +41,17 @@ public class BoardWriteSer extends HttpServlet {
 			rd.forward(request, response);
 		}else
 		{
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/boardRegmod.jsp?i_board="+i_board);
-			rd.forward(request, response);
+			System.out.println(i_board);
+			if(i_board==0) {
+				response.sendRedirect("/boardList");
+				return;
+			}else {
+				BoardVO para = new BoardVO();
+				para.setI_board(i_board);
+				request.setAttribute("data", BoardDAO.detailBoardList(para));
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/boardRegmod.jsp?i_board="+strI_board);
+				rd.forward(request, response);
+			}	
 		}
 	}
 
