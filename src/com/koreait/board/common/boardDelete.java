@@ -38,9 +38,21 @@ public class boardDelete extends HttpServlet {
 		String strI_board = request.getParameter("i_board");
 		int i_board = Utils.parseStringToInt(strI_board, 0);
 		System.out.println(i_board);
+		if(i_board==0) {
+			response.sendRedirect("/errSer?err=2&target=BoardListSer");
+			return;
+		}
 		para.setI_board(i_board);
-		BoardDAO.deleteList(para);
-		response.sendRedirect("/BoardListSer");
+		int result = BoardDAO.deleteList(para);
+		
+
+		
+		if(result ==1) {
+			response.sendRedirect("/BoardListSer");
+		}else{
+			response.sendRedirect("/errSer?err=1&target=BoardListSer");
+		}
+		
 	}
 
 	/**

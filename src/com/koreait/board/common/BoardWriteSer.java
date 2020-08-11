@@ -39,19 +39,15 @@ public class BoardWriteSer extends HttpServlet {
 		if(i_board==0) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/boardRegmod.jsp");
 			rd.forward(request, response);
-		}else
+		}
+		else
 		{
 			System.out.println(i_board);
-			if(i_board==0) {
-				response.sendRedirect("/boardList");
-				return;
-			}else {
-				BoardVO para = new BoardVO();
-				para.setI_board(i_board);
-				request.setAttribute("data", BoardDAO.detailBoardList(para));
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/boardRegmod.jsp?i_board="+strI_board);
-				rd.forward(request, response);
-			}	
+			BoardVO para = new BoardVO();
+			para.setI_board(i_board);
+			request.setAttribute("data", BoardDAO.detailBoardList(para));
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/boardRegmod.jsp?i_board="+strI_board);
+			rd.forward(request, response);
 		}
 	}
 
@@ -70,23 +66,31 @@ public class BoardWriteSer extends HttpServlet {
 		String title = request.getParameter("title");
 		String ctnt = request.getParameter("ctnt");
 		String i_student = request.getParameter("i_student");
-		
+		int result = -1;
 		para.setI_board(i_board);
 		para.setTitle(title);
 		para.setCtnt(ctnt);
 		para.setI_student(i_student);
+		
 		//BoardDAO.updateList(para);
 		if(i_board==0) {
-			BoardDAO.insertList(para);
+			result = BoardDAO.insertList(para);
 		}else {
-			BoardDAO.updateList(para);
+			result = BoardDAO.updateList(para);
+		}
+		System.out.println("result : " + result);
+		
+		if(result==1) {
+			response.sendRedirect("/BoardListSer");
+		}else {
+			request.setAttribute("msg", "Error");
+			doGet(request,response);
 		}
 		
-
 		// request.setAttribute("data",BoardDAO.insertList(para));
-//				String jsp = "/WEB-INF/view/boardRegmod.jsp";
-//				request.getRequestDispatcher(jsp).forward(request, response);
-		response.sendRedirect("/BoardListSer");
+		// String jsp = "/WEB-INF/view/boardRegmod.jsp";
+		// request.getRequestDispatcher(jsp).forward(request, response);
+		
 		
 	}
 

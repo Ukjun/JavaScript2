@@ -52,15 +52,10 @@ public class BoardListSer extends HttpServlet {
 		
 		try {
 			// getCon()에서 throws로 try catch를 넘겨버렸기 때문에 써줘야된다.
-//			Connection conn = DBCon.getCon();
-//			PreparedStatement ps = null;
-//			ResultSet rs = null;
-//			DBCon.close(conn, ps);
-//			DBCon.close(conn, ps, rs);
-			
 			List<BoardVO> list = BoardDAO.selBoardList();
 			request.setAttribute("data", list);
 //			list = parameter는 object타입이다
+			// 리스트 	불러오기 + boardList.jsp로 값과 같이 이동 
 			BoardDAO.selBoardList();
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/boardList.jsp");
 			

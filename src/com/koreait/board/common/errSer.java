@@ -1,29 +1,23 @@
-package com.koreait.board;
+package com.koreait.board.common;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.koreait.board.common.Utils;
-import com.koreait.board.db.BoardDAO;
-import com.koreait.board.vo.BoardVO;
-
 /**
- * Servlet implementation class BoardDetailSer
+ * Servlet implementation class errSer
  */
-@WebServlet("/boardDetail")
-public class BoardDetailSer extends HttpServlet {
+@WebServlet("/errSer")
+public class errSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardDetailSer() {
+    public errSer() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,20 +28,25 @@ public class BoardDetailSer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		String strI_board = request.getParameter("i_board");
+		String err = request.getParameter("err");
+		String target = request.getParameter("target");
+		String msg = null;
 		
-		int i_board = Utils.parseStringToInt(strI_board, 0);
-		System.out.println("i_board = " + i_board);
-		if(i_board==0) {
-			response.sendRedirect("/BoardListSer");
-			return;
-		}else {
-			BoardVO para = new BoardVO();
-			para.setI_board(i_board);
-			request.setAttribute("data", BoardDAO.detailBoardList(para));
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/boardDetail.jsp?i_board="+strI_board);
-			rd.forward(request, response);
-		}	
+		
+		switch(err) {
+		case "1":
+			msg = "삭제할수 없습니다.";
+			break;
+		case "2":
+			msg = "잘못된 접근입니다.";
+			break;
+		}
+		
+		request.setAttribute("msg",msg);
+		request.setAttribute("target",target);
+		
+		String jsp = "/WEB-INF/view/errSer.jsp";
+		request.getRequestDispatcher(jsp).forward(request, response);
 	}
 
 	/**

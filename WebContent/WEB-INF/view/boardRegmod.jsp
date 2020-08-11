@@ -18,8 +18,14 @@
         padding-right: 10px;
         
      }
+     .err{
+     text-align : center;
+     color : #e74c3c;
+     }
 </style>
 <body>
+<div class="err"> ${msg }
+</div>
 	<form id = "frm"  method="post" onsubmit="return chk()">
 	<fieldset>
 		<legend>
