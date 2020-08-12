@@ -37,7 +37,7 @@ public class boardDelete extends HttpServlet {
 		BoardVO para = new BoardVO();
 		String strI_board = request.getParameter("i_board");
 		int i_board = Utils.parseStringToInt(strI_board, 0);
-		System.out.println(i_board);
+		System.out.println("Delete Check i_board :"+i_board);
 		if(i_board==0) {
 			response.sendRedirect("/errSer?err=2&target=BoardListSer");
 			return;
@@ -46,7 +46,8 @@ public class boardDelete extends HttpServlet {
 		int result = BoardDAO.deleteList(para);
 		
 
-		
+		System.out.println("Delete Check2 i_board :"+i_board);
+		System.out.println("Result check : " + result);
 		if(result ==1) {
 			response.sendRedirect("/BoardListSer");
 		}else{

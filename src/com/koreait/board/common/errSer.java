@@ -32,7 +32,7 @@ public class errSer extends HttpServlet {
 		String target = request.getParameter("target");
 		String msg = null;
 		
-		
+		System.out.println("err: " + err);
 		switch(err) {
 		case "1":
 			msg = "삭제할수 없습니다.";

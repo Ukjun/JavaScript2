@@ -37,8 +37,8 @@ public class BoardWriteSer extends HttpServlet {
 		System.out.println(i_board);
 //		BoardDAO.insertList(para);
 		if(i_board==0) {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/boardRegmod.jsp");
-			rd.forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/boardRegmod.jsp").forward(request, response);
+			
 		}
 		else
 		{
@@ -46,8 +46,7 @@ public class BoardWriteSer extends HttpServlet {
 			BoardVO para = new BoardVO();
 			para.setI_board(i_board);
 			request.setAttribute("data", BoardDAO.detailBoardList(para));
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/boardRegmod.jsp?i_board="+strI_board);
-			rd.forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/boardRegmod.jsp?i_board="+strI_board).forward(request, response);;
 		}
 	}
 
@@ -73,6 +72,7 @@ public class BoardWriteSer extends HttpServlet {
 		para.setI_student(i_student);
 		
 		//BoardDAO.updateList(para);
+		System.out.println("Insert check i_board : " + i_board);
 		if(i_board==0) {
 			result = BoardDAO.insertList(para);
 		}else {
@@ -84,6 +84,7 @@ public class BoardWriteSer extends HttpServlet {
 			response.sendRedirect("/BoardListSer");
 		}else {
 			request.setAttribute("msg", "Error");
+			//response.sendRedirect("/errSer");
 			doGet(request,response);
 		}
 		

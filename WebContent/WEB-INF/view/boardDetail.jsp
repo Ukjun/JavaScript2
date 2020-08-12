@@ -18,16 +18,24 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-
+	#container{
+		margin: 20 auto;
+		text-align: center;
+		line-height: 50px;
+		border: 3px dotted #A8C8F9;
+	}
 </style>
 </head>
 <body>
-<div>번호 : ${data.i_board}</div>
-<div>제목 : ${data.title}</div>
-<div>내용 : ${data.ctnt}</div>
-<div>작성자 : ${data.i_student}</div>
-<button onclick="movetoWrite(<%=i_board%>)">수정</button>
-<button onClick="movetoDelete(<%=i_board%>)">삭제</button>
+<div id="container">
+	<div>번호 : ${data.i_board}</div>
+	<div>제목 : ${data.title}</div>
+	<div>내용 : ${data.ctnt}</div>
+	<div>작성자 : ${data.i_student}</div>
+	<%-- <button onclick="movetoWrite(<%=i_board%>)">수정</button>&nbsp;&nbsp;&nbsp;&nbsp; --%>
+	<a href="boardWrite?i_board=${data.i_board}"><button>수정</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="boardDelete?i_board=<%=i_board%>"><button>삭제</button></a>
+</div>
 <%-- <form>
 <fieldset>
 <legend> <strong>글 내용 </strong></legend>

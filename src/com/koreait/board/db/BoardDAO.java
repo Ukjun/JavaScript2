@@ -143,6 +143,7 @@ public class BoardDAO {
 		}finally {
 			DBCon.close(conn, ps);
 		}
+		System.out.println("delete result : " + result);
 		return result;
 	}
 }

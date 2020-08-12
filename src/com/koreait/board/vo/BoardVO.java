@@ -5,6 +5,13 @@ public class BoardVO {
 	private String title;
 	private String ctnt;
 	private String i_student;
+	private String t_date;
+	public String getT_date() {
+		return t_date;
+	}
+	public void setT_date(String t_date) {
+		this.t_date = t_date;
+	}
 	public int getI_board() {
 		return i_board;
 	}

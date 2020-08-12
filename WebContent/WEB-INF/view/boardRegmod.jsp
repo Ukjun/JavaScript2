@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title></title>
 </head>
 <style>
      ul{
@@ -24,21 +24,21 @@
      }
 </style>
 <body>
-<div class="err"> ${msg }
-</div>
+<div class="err"> ${msg }</div>
 	<form id = "frm"  method="post" onsubmit="return chk()">
 	<fieldset>
 		<legend>
-		<strong>게시판 작성</strong>
+		<strong>${data ==null ? "글 등록" : "글 수정" }</strong>
 		</legend>
 		<ul>
+			<li><input type = "hidden" name="i_board" value="${data.i_board }"></li>
             <li><label>제목 : </label><input type="text" name="title" 
             id="title" autofocus placeholder="이름을 입력해주세요"></li>
             <li><label>내용 : </label><textarea name="ctnt" id="ctnt" cols="50" rows="6"
             placeholder="50자 이내로 써주세요"></textarea></li>
             <li><label>작성자 : </label><input type = "text" name="i_student" id="i_student"></li>
         </ul>
-            <input type="submit" onclick="insertUpdate(${data.i_board})" value="작성">
+            <input type="submit" onclick="insertUpdate(${data.i_board})" value="${data ==null ? "글 등록" : "글 수정" }">
             <input type="reset" value="다시 작성">
 	</fieldset>
 			

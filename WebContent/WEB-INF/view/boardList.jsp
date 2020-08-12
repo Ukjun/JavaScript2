@@ -29,11 +29,10 @@ table{
 	margin: 0 auto;
 	width: 300px;
 }
-table tr td {
-	border : 1px solid black;
-}
-td {
+
+td,th {
 	text-align: center;
+	line-height: 50px;
 }
 .itemRow:hover{
 	cursor: pointer;
@@ -51,16 +50,17 @@ td {
 </style>
 </head>
 <body>
-	<div id="first">게시판리스트
+	<div id="first"><h3>게시판리스트</h3>
 	<!-- 주소값은 보통 서블릿으로 지정한다. -->
 	<br>
-	<a href="/boardWrite"><button>글 쓰기</button></a>
+	<a href="/boardWrite">글 쓰기</a>
 	<table>
 	<tr>
 			<th>NO</th>
 			<th>제목</th>
 			<th>내용</th>
 			<th>작성자</th>
+			<th>작성일</th>
 	</tr>
 	<% for(BoardVO vo : list) { %>
 	<tr class="itemRow" onclick="moveToDetail(<%=vo.getI_board()%>)">
@@ -68,6 +68,7 @@ td {
 		<td><%=vo.getTitle()%></td>
 		<td><%=vo.getCtnt()%></td>
 		<td><%=vo.getI_student()%></td>
+		<td><%=vo.getT_date()%></td>
 	</tr>
 	<%}%>
 	</table>

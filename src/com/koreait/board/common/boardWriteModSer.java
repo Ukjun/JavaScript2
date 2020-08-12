@@ -7,10 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.koreait.board.db.BoardDAO;
+import com.koreait.board.vo.BoardVO;
+
 /**
  * Servlet implementation class boardWriteModSer
  */
-@WebServlet("/boardWriteModSer")
+@WebServlet("/board")
 public class boardWriteModSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,9 +34,13 @@ public class boardWriteModSer extends HttpServlet {
 		System.out.println(i_board);
 		if(i_board==0) {
 			response.sendRedirect("/boardList");
-		}else {
-			//response.sendRedirect(location);
+			return;
 		}
+		BoardVO para = new BoardVO();
+		para.setI_board(i_board);
+		request.setAttribute("data", BoardDAO.updateList(para));
+		String jsp = "/WEB-INF/view/boardRegmod.jsp";
+		request.getRequestDispatcher(jsp).forward(request, response);
 	}
 
 	/**
